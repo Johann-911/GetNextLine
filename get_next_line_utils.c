@@ -6,7 +6,7 @@
 /*   By: jtoumani <jtoumani@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 13:18:25 by jtoumani          #+#    #+#             */
-/*   Updated: 2025/04/16 18:07:57 by jtoumani         ###   ########.fr       */
+/*   Updated: 2025/04/16 18:11:05 by jtoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ size_t	ft_strlen(char *str)
 	int	a;
 
 	a = 0;
-	if(str == NULL)
-		return 0;
+	if (str == NULL)
+		return (0);
 	while (str[a] != '\0')
 	{
-		if(str[a] == '\n')
-			return a +1;
-		a++;	
+		if (str[a] == '\n')
+			return (a + 1);
+		a++;
 	}
 	return (a);
 }
@@ -33,7 +33,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	char	*strjoin;
 	int		i;
 	int		j;
-	
+
 	i = 0;
 	j = 0;
 	strjoin = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
@@ -47,11 +47,9 @@ char	*ft_strjoin(char *s1, char *s2)
 		strjoin[j] = s2[i];
 		j++;
 		i++;
-		if(strjoin[j - 1] == '\n')
-			break;
+		if (strjoin[j - 1] == '\n')
+			break ;
 	}
 	strjoin[j] = '\0';
 	return (strjoin);
 }
-
-//

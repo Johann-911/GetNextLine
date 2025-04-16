@@ -6,84 +6,84 @@
 /*   By: jtoumani <jtoumani@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 14:49:57 by jtoumani          #+#    #+#             */
-/*   Updated: 2025/04/16 18:08:08 by jtoumani         ###   ########.fr       */
+/*   Updated: 2025/04/16 18:15:30 by jtoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-
-void update_buffer(char *buffer)
+void	update_buffer(char *buffer)
 {
-    int     i;
-    int j;
-    j = 0;
-    i = 0;
+	int	i;
+	int	j;
 
-    while (buffer[i] && buffer[i] != '\n')
-        i++;
-    if (buffer[i] == '\n')
-    {
-        i++; 
-        while(buffer[i])
-            buffer[j++] = buffer[i++];
-    }
-    while (j <= BUFFER_SIZE)
-        buffer[j++] = '\0';
+	j = 0;
+	i = 0;
+	while (buffer[i] && buffer[i] != '\n')
+		i++;
+	if (buffer[i] == '\n')
+	{
+		i++;
+		while (buffer[i])
+			buffer[j++] = buffer[i++];
+	}
+	while (j <= BUFFER_SIZE)
+		buffer[j++] = '\0';
 }
 
-int build_line(char **line, char *buffer)
+int	build_line(char **line, char *buffer)
 {
-    char *temp;
-    int i;
+	char	*temp;
+	int		i;
 
-    i = 0;
-    temp = ft_strjoin(*line, buffer);
-    free(*line);
-    if (temp == NULL)
-        return (-1);
-    *line = temp;
-    if (*line == NULL) 
-        return (-1);
-    while ((*line)[i] != '\0')
-    {
-        if ((*line)[i] == '\n')
-        {
-            if ((*line)[i + 1] != '\0')
-                (*line)[i + 1] = '\0';
-            return 1;
-        } 
-        i++;
-    }
-    return 0;
+	i = 0;
+	temp = ft_strjoin(*line, buffer);
+	free(*line);
+	if (temp == NULL)
+		return (-1);
+	*line = temp;
+	if (*line == NULL)
+		return (-1);
+	while ((*line)[i] != '\0')
+	{
+		if ((*line)[i] == '\n')
+		{
+			if ((*line)[i + 1] != '\0')
+				(*line)[i + 1] = '\0';
+			return (1);
+		}
+		i++;
+	}
+	return (0);
 }
-char    *get_next_line(int fd)
+
+char	*get_next_line(int fd)
 {
-    static char buffer[BUFFER_SIZE + 1];
-    char        *line;
-    int         bytes_read;
-    int         ready;
-    
-    line = NULL;
-    if (fd < 0 || BUFFER_SIZE <= 0)
-        return NULL;
-    while (1)
-    {
-        if(buffer[0] == '\0')
-        {
-            bytes_read = read(fd, buffer, BUFFER_SIZE);
+	static char	buffer[BUFFER_SIZE + 1];
+	char		*line;
+	int			bytes_read;
+	int			ready;
+
+	line = NULL;
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
+	while (1)
+	{
+		if (buffer[0] == '\0')
+		{
+			bytes_read = read(fd, buffer, BUFFER_SIZE);
 			if (bytes_read == -1)
 				return (free(line), NULL);
 			if (bytes_read == 0)
 				return (line);
-        }
-        ready = build_line(&line, buffer);
-        update_buffer(buffer);
-        if (ready == 1)
-            return (line);
-        if (ready == -1)
-            return NULL;
-    }
+		}
+		ready = build_line(&line, buffer);
+		update_buffer(buffer);
+		if (ready == 1)
+			return (line);
+		if (ready == -1)
+			return (NULL);
+	}
 }
 
 // #include <fcntl.h>
