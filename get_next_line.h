@@ -6,7 +6,7 @@
 /*   By: jtoumani <jtoumani@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 17:10:28 by jtoumani          #+#    #+#             */
-/*   Updated: 2025/04/15 17:33:56 by jtoumani         ###   ########.fr       */
+/*   Updated: 2025/04/16 17:48:31 by jtoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ char	*ft_substr(char *s, unsigned int start, size_t len);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strdup(const char *s1);
+void	*ft_calloc(size_t count, size_t size);
+
 
 
 #endif
