@@ -6,7 +6,7 @@
 /*   By: jtoumani <jtoumani@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 13:18:25 by jtoumani          #+#    #+#             */
-/*   Updated: 2025/04/15 12:53:15 by jtoumani         ###   ########.fr       */
+/*   Updated: 2025/04/15 18:03:30 by jtoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,49 @@ size_t	ft_strlen(char *str)
 	}
 	return (a);
 }
+
+char	*ft_strjoin(char *s1, char *s2)
+{
+	char	*strjoin;
+	int		i;
+	int		j;
+	
+	i = 0;
+	j = 0;
+	if(!s1 && !s2)
+		return NULL;
+	strjoin = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
+	if (strjoin == NULL)
+		return (NULL);
+	while (s1 != NULL && s1[i] != '\0')
+	strjoin[j++] = s1[i++];
+	i = 0;
+	while (s2[i] != '\0')
+	{
+		strjoin[j++] = s2[i++];
+		if(strjoin[i - 1] == '\n')
+			break;
+	}
+	strjoin[j] = '\0';
+	return (strjoin);
+}
+
+char	*ft_strchr(const char *s, int c)
+{
+	unsigned char	chr;
+	
+	chr = c;
+	while (*s)
+	{
+		if (*s == chr)
+		return ((char *)s);
+		s++;
+	}
+	if (chr == '\0')
+	return ((char *)s);
+	return (NULL);
+}
+
 // size_t	ft_strlcpy(char *dst, char *src, size_t size)
 // {
 // 	size_t	i;
@@ -69,63 +112,20 @@ size_t	ft_strlen(char *str)
 // 	substr[i] = '\0';
 // 	return (substr);
 // }
-
-char	*ft_strjoin(char *s1, char *s2)
-{
-	char	*strjoin;
-	int		i;
-	int		j;
-
-	i = 0;
-	j = 0;
-	if(!s1 || !s2)
-		return NULL;
-	strjoin = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
-	if (strjoin == NULL)
-		return (NULL);
-	while (s1[i] != '\0')
-		strjoin[j++] = s1[i++];
-	i = 0;
-	while (s2[i] != '\0')
-	{
-		strjoin[j++] = s2[i++];
-		if(strjoin[i - 1] == '\n')
-			break;
-	}
-	strjoin[j] = '\0';
-	return (strjoin);
-}
-
-char	*ft_strchr(const char *s, int c)
-{
-	unsigned char	chr;
-
-	chr = c;
-	while (*s)
-	{
-		if (*s == chr)
-			return ((char *)s);
-		s++;
-	}
-	if (chr == '\0')
-		return ((char *)s);
-	return (NULL);
-}
-
 // char	*ft_strdup(const char *s1)
 // {
-// 	char	*dupe;
-// 	int		i;
-
-// 	i = 0;
-// 	if(!s1)
-// 		return NULL;
-// 	while (s1[i])
-// 		i++;
-// 	dupe = (char *)malloc((i + 1) * sizeof(char));
-// 	if (!dupe)
-// 		return (NULL);
-// 	i = 0;
+	// 	char	*dupe;
+	// 	int		i;
+	
+	// 	i = 0;
+	// 	if(!s1)
+	// 		return NULL;
+	// 	while (s1[i])
+	// 		i++;
+	// 	dupe = (char *)malloc((i + 1) * sizeof(char));
+	// 	if (!dupe)
+	// 		return (NULL);
+	// 	i = 0;
 // 	while (s1[i] != '\0')
 // 	{
 // 		dupe[i] = s1[i];

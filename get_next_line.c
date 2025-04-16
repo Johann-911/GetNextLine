@@ -6,7 +6,7 @@
 /*   By: jtoumani <jtoumani@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 14:49:57 by jtoumani          #+#    #+#             */
-/*   Updated: 2025/04/15 13:00:36 by jtoumani         ###   ########.fr       */
+/*   Updated: 2025/04/15 18:02:29 by jtoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ void update_buffer(char *buffer)
         while(buffer[i])
             buffer[j++] = buffer[i++];
     }
-    else
-    {
-        buffer[0] = '\0';
-        return;
-    }
+    // else
+    // {
+    //     buffer[0] = '\0';
+    //     return;
+    // }
     while (j <= BUFFER_SIZE)
         buffer[j++] = '\0';
 }
@@ -42,18 +42,22 @@ int build_line(char **line, char *buffer)
     char *temp;
     int i;
 
-    i = 0;    
+    i = 0;
     temp = ft_strjoin(*line, buffer);
     free(*line);
-    if (!temp)
+    if (temp == NULL)
         return (-1);
     *line = temp;
     if (*line == NULL) 
         return (-1);
     while ((*line)[i] != '\0')
     {
-        if ((*line)[i] == '\n') 
+        if ((*line)[i] == '\n')
+        {
+            if ((*line)[i + 1] != '\0')
+                (*line)[i + 1] = '\0';
             return 1;
+        } 
         i++;
     }
     return 0;
@@ -70,14 +74,14 @@ char    *get_next_line(int fd)
         return NULL;
     while (1)
     {
-        if(buffer [0] == '\0')
+        if(buffer[0] == '\0')
         {
             bytes_read = read(fd, buffer, BUFFER_SIZE);
 			if (bytes_read == -1)
 				return (free(line), NULL);
 			if (bytes_read == 0)
-				return (line);        
-        }    
+				return (line);
+        }
         ready = build_line(&line, buffer);
         update_buffer(buffer);
         if (ready == 1)
@@ -93,17 +97,20 @@ char    *get_next_line(int fd)
 //     int     fd;
 //     char    *line;
 
+//     printf("Before we open\n");
 //     fd = open("test.txt", O_RDONLY);
 //     if (fd < 0)
 //     {
 //         perror("Fehler beim Öffnen der Datei");
 //         return (1);
 //     }
-
-//     while ((line = get_next_line(fd)) != NULL)
+//     printf("Getting into the loop\n");
+//     line = get_next_line(fd);
+//     while (line != NULL)
 //     {
 //         printf("Line: %s", line);
 //         free(line);
+//         line = get_next_line(fd);
 //     }
 
 //     close(fd);

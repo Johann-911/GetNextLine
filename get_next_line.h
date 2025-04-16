@@ -6,7 +6,7 @@
 /*   By: jtoumani <jtoumani@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 17:10:28 by jtoumani          #+#    #+#             */
-/*   Updated: 2025/04/11 17:09:40 by jtoumani         ###   ########.fr       */
+/*   Updated: 2025/04/15 17:33:56 by jtoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <string.h>
 
 # ifndef	BUFFER_SIZE
-#  define BUFFER_SIZE 20
+#  define BUFFER_SIZE 10
 # endif
 
 int build_line(char **line, char *buffer);
