@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jtoumani <jtoumani@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/09 14:49:57 by jtoumani          #+#    #+#             */
-/*   Updated: 2025/04/17 14:27:46 by jtoumani         ###   ########.fr       */
+/*   Created: 2025/04/17 14:28:52 by jtoumani          #+#    #+#             */
+/*   Updated: 2025/04/17 17:09:04 by jtoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,55 +59,29 @@ int	build_line(char **line, char *buffer)
 
 char	*get_next_line(int fd)
 {
-	static char	buffer[BUFFER_SIZE + 1];
+	static char	buffer[FOPEN_MAX][BUFFER_SIZE + 1];
 	char		*line;
 	int			bytes_read;
 	int			ready;
 
 	line = NULL;
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd >= FOPEN_MAX)
 		return (NULL);
 	while (1)
 	{
-		if (buffer[0] == '\0')
+		if (buffer[fd][0] == '\0')
 		{
-			bytes_read = read(fd, buffer, BUFFER_SIZE);
+			bytes_read = read(fd, buffer[fd], BUFFER_SIZE);
 			if (bytes_read == -1)
 				return (free(line), NULL);
 			if (bytes_read == 0)
 				return (line);
 		}
-		ready = build_line(&line, buffer);
-		update_buffer(buffer);
+		ready = build_line(&line, buffer[fd]);
+		update_buffer(buffer[fd]);
 		if (ready == 1)
 			return (line);
 		if (ready == -1)
 			return (NULL);
 	}
 }
-
-// #include <fcntl.h>
-// int main(void)
-// {
-//     int     fd;
-//     char    *line;
-
-//     printf("Before we open\n");
-//     fd = open("test.txt", O_RDONLY);
-//     if (fd < 0)
-//     {
-//         perror("Fehler beim Öffnen der Datei");
-//         return (1);
-//     }
-//     printf("Getting into the loop\n");
-//     line = get_next_line(fd);
-
-//     while (line != NULL)
-//     {
-//         printf("Line: %s", line);
-//         free(line);
-//         line = get_next_line(fd);
-//     }
-//     close(fd);
-//     return (0);
-// }
