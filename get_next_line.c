@@ -6,7 +6,7 @@
 /*   By: jtoumani <jtoumani@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 14:49:57 by jtoumani          #+#    #+#             */
-/*   Updated: 2025/04/17 14:27:46 by jtoumani         ###   ########.fr       */
+/*   Updated: 2025/05/14 14:48:19 by jtoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ char	*get_next_line(int fd)
 			return (NULL);
 	}
 }
-
 // #include <fcntl.h>
 // int main(void)
 // {

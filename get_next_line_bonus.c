@@ -6,11 +6,11 @@
 /*   By: jtoumani <jtoumani@student.42heilbronn.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 14:28:52 by jtoumani          #+#    #+#             */
-/*   Updated: 2025/04/17 17:09:04 by jtoumani         ###   ########.fr       */
+/*   Updated: 2025/04/23 18:39:35 by jtoumani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 void	update_buffer(char *buffer)
 {
@@ -65,8 +65,8 @@ char	*get_next_line(int fd)
 	int			ready;
 
 	line = NULL;
-	if (fd < 0 || BUFFER_SIZE <= 0 || fd >= FOPEN_MAX)
-		return (NULL);
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd > FOPEN_MAX)
+		return (buffer[fd][0] = '0' NULL);
 	while (1)
 	{
 		if (buffer[fd][0] == '\0')
